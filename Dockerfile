@@ -51,7 +51,6 @@ RUN sdkmanager --package_file=/sdk/packages.txt
 
 
 # NODE INSTALL
-RUN apt install -y curl
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 ENV NVM_DIR=/root/.nvm
 RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
