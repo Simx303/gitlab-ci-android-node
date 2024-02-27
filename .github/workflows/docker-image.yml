@@ -18,7 +18,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            jangrewe/gitlab-ci-android
+            ssimx303/gitlab-ci-android-node
           tags: |
             type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'master') }}
             type=raw,value={{tag}}
