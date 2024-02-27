@@ -2,6 +2,7 @@ FROM ubuntu:20.04
 MAINTAINER Jan Grewe <jan@faked.org>
 
 ENV VERSION_TOOLS "8512546"
+ENV NODE_VERSION 20.11.1
 
 ENV ANDROID_SDK_ROOT "/sdk"
 # Keep alias for compatibility
@@ -47,3 +48,15 @@ RUN mkdir -p /root/.android \
 
 ADD packages.txt /sdk
 RUN sdkmanager --package_file=/sdk/packages.txt
+
+
+# NODE INSTALL
+RUN apt install -y curl
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+ENV NVM_DIR=/root/.nvm
+RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
+ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+RUN node --version
+RUN npm --version
